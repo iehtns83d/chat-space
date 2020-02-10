@@ -1,0 +1,35 @@
+.chat-main
+  .chat-main__group-info
+    .chat-main__group-info__left-box
+      .chat-main__group-info__left-box__current-group
+        asdf
+      .chat-main__group-info__left-box__member-list
+        Member :
+    .chat-main__group-info__right-box
+      = link_to "#",class: "edit-btn" do
+        Edit
+  .chat-main__message-list
+    .chat-main__message-list__data-message-id
+      .chat-main__message-list__data-message-id__upper-info
+        .chat-main__message-list__data-message-id__upper-info__taker
+          1
+        .chat-main__message-list__data-message-id__upper-info__date
+          20200210
+      .chat-main__message-list__data-message-id__message-text
+        text1
+      
+      .chat-main__message-list__data-message-id__upper-info
+        .chat-main__message-list__data-message-id__upper-info__taker
+          2
+        .chat-main__message-list__data-message-id__upper-info__date
+          20200211
+      .chat-main__message-list__data-message-id__message-text
+        text2
+  .form
+    %form.new-message
+      .input-box
+        %input{type:"text",class:"input-box__text",placeholder:"type a message"}
+        %label{class:"input-box__image"}
+          = icon('fas', 'image')
+          %input{type:"file",class:"input-box__image__file"}
+      %input{type:"submit",value:"Send",class:"submit-btn"}
