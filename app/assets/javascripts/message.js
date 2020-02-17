@@ -1,4 +1,45 @@
 $(function(){
+  function buildHTML(message){
+    if ( message.image ) {
+      var html =
+       `<div class="chat-main__message-list__data-message-id" data-message-id=${message.id}>
+          <div class="chat-main__message-list__data-message-id__upper-info">
+            <div class="chat-main__message-list__data-message-id__upper-info__taker">
+              ${message.user_name}
+            </div>
+            <div class="chat-main__message-list__data-message-id__upper-info__date">
+              ${message.created_at}
+            </div>
+          </div>
+          <div class="chat-main__message-list__data-message-id__message-text">
+            <p class="chat-main__message-list__data-message-id__message-text">
+              ${message.content}
+            </p>
+          </div>
+          <img src=${message.image} >
+        </div>`
+      return html;
+    } else {
+      var html =
+       `<div class="chat-main__message-list__data-message-id" data-message-id=${message.id}>
+          <div class="chat-main__message-list__data-message-id__upper-info">
+            <div class="chat-main__message-list__data-message-id__upper-info__taker">
+              ${message.user_name}
+            </div>
+            <div class="chat-main__message-list__data-message-id__upper-info__date">
+              ${message.created_at}
+            </div>
+          </div>
+          <div class="chat-main__message-list__data-message-id__message-text">
+            <p class="chat-main__message-list__data-message-id__message-text">
+              ${message.content}
+            </p>
+          </div>
+        </div>`
+      console.log(html)
+      return html;
+    };
+  }
 
   $('#new_message').on('submit', function(e){
     e.preventDefault();
@@ -12,6 +53,15 @@ $(function(){
       processData: false,
       contentType: false
     })
+    .done(function(data){
+      var html = buildHTML(data);
+      $('.chat-main__message-list').append(html);      
+      $('form')[0].reset();
+      $('.chat-main__message-list').animate({ scrollTop: $('.chat-main__message-list')[0].scrollHeight});
+      $('.submit-btn').prop('disabled', false);
+    })
+    .fail(function() {
+      alert("メッセージ送信に失敗しました");
+    });
   });
-
 });
